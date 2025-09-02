@@ -1,0 +1,21 @@
+import { useQuery } from "@tanstack/react-query";
+import { getHeroesByIdOsSlugAction } from "../actions/get-hero-by-id-or-slug.action";
+
+export const useHeroDetail = (idSlug: string) => {
+    const { data: superheroData } = useQuery({
+        queryKey: ["heroes", "idSlug", idSlug],
+        queryFn: () => getHeroesByIdOsSlugAction(idSlug),
+        staleTime: 1000 * 60 * 5, // 5 minutos
+    });
+
+    const totalPower = superheroData
+        ? superheroData.strength + superheroData.intelligence + superheroData.speed + superheroData.durability
+        : 0;
+    const averagePower = Math.round((totalPower / 4) * 10);
+
+    return {
+        superheroData,
+        totalPower,
+        averagePower,
+    };
+};

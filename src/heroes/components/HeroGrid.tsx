@@ -1,16 +1,21 @@
-import { Brain, Eye, Gauge, Heart, Shield, Zap } from "lucide-react";
-
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import type { Hero } from "../types/hero.interface";
 import { HeroGridCard } from "./HeroGridCard";
 
-export const HeroGrid = () => {
+interface Props {
+    heroes: Hero[];
+}
+
+export const HeroGrid = ({ heroes }: Props) => {
+    if (!heroes) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
             {/* Hero Card 1 - Superman */}
-            <HeroGridCard />
+            {heroes.map((hero) => (
+                <HeroGridCard key={hero.id} hero={hero} />
+            ))}
             {/* Hero Card 2 - Batman */}
             {/* <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50">
                 <div className="relative h-64 overflow-hidden">

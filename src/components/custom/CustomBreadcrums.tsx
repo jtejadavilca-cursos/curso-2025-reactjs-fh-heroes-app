@@ -1,49 +1,47 @@
-import { Link, useLocation } from "react-router";
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbSeparator } from "../ui/breadcrumb";
-import { useMemo } from "react";
+import { SlashIcon } from "lucide-react";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "../ui/breadcrumb";
+import { Link } from "react-router";
 
-const getBreadcrumbs = (paths: string[]): string[] => {
-    if (paths.length <= 1 || (paths.length === 2 && paths[1] === "")) {
-        return [];
-    }
+interface Breadcrumb {
+    label: string;
+    to: string;
+}
 
-    return paths;
-};
+interface Props {
+    currentPage: string;
+    breadcrumbs?: Breadcrumb[];
+}
 
-const toTitleCase = (value: string) => {
-    if (!value || value.trim().length === 0) return "";
-
-    return value.replace(/\w\S*/g, (text) => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase());
-};
-
-export const CustomBreadcrums = () => {
-    const { pathname } = useLocation();
-    const paths = useMemo(() => getBreadcrumbs(pathname.split("/")), [pathname]);
-
+export const CustomBreadcrumbs = ({ currentPage, breadcrumbs = [] }: Props) => {
     return (
-        <Breadcrumb className="py-4 flex justify-end">
+        <Breadcrumb className="my-5">
             <BreadcrumbList>
-                {paths.length > 0 && (
-                    <>
+                <BreadcrumbItem>
+                    <BreadcrumbLink asChild>
+                        <Link to="/">Inicio</Link>
+                    </BreadcrumbLink>
+                </BreadcrumbItem>
+
+                {breadcrumbs.map((crumb) => (
+                    <div className="flex items-center">
                         <BreadcrumbItem>
-                            <Link to="/">Home</Link>
+                            <BreadcrumbSeparator>
+                                <SlashIcon />
+                            </BreadcrumbSeparator>
+                            <BreadcrumbLink asChild>
+                                <Link to={crumb.to}>{crumb.label}</Link>
+                            </BreadcrumbLink>
                         </BreadcrumbItem>
-                    </>
-                )}
-                {paths.slice(1).map((path) => {
-                    return (
-                        <>
-                            <BreadcrumbSeparator />
-                            <BreadcrumbItem>
-                                {path === paths[paths.length - 1] ? (
-                                    <span>{toTitleCase(path)}</span>
-                                ) : (
-                                    <Link to={`/${path}`}>{toTitleCase(path)}</Link>
-                                )}
-                            </BreadcrumbItem>
-                        </>
-                    );
-                })}
+                    </div>
+                ))}
+
+                <BreadcrumbSeparator>
+                    <SlashIcon />
+                </BreadcrumbSeparator>
+
+                <BreadcrumbItem>
+                    <BreadcrumbLink className="text-black">{currentPage}</BreadcrumbLink>
+                </BreadcrumbItem>
             </BreadcrumbList>
         </Breadcrumb>
     );

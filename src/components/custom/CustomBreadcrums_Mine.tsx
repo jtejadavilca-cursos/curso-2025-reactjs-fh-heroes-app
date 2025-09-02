@@ -30,7 +30,7 @@ export const CustomBreadcrums = () => {
                         </BreadcrumbItem>
                     </>
                 )}
-                {paths.slice(1).map((path) => {
+                {/* {paths.slice(1).map((path) => {
                     return (
                         <>
                             <BreadcrumbSeparator />
@@ -39,7 +39,7 @@ export const CustomBreadcrums = () => {
                             </BreadcrumbItem>
                         </>
                     );
-                })}
+                })} */}
             </BreadcrumbList>
         </Breadcrumb>
     );

@@ -1,14 +1,34 @@
 import { Heart } from "lucide-react";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CustomJumbotron } from "@/components/custom/CustomJumbotron";
 import { HeroStats } from "@/heroes/components/HeroStats";
 import { HeroGrid } from "@/heroes/components/HeroGrid";
-import { useState } from "react";
 import { CustomPagination } from "@/components/custom/CustomPagination";
+import { useSearchParams } from "react-router";
+import { useHeroSummary } from "@/heroes/hooks/useHeroSummary";
+import { usePaginatedHero } from "@/heroes/hooks/usePaginatedHero";
 
-type TabsType = "all" | "favorites" | "heroes" | "villians";
+type TabsType = "all" | "favorites" | "hero" | "villain";
+
 export const HomePage = () => {
-    const [activeTab, setActiveTab] = useState<TabsType>("favorites");
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const category = searchParams.get("tab") ?? "all";
+    const page = searchParams.get("page") ?? 1;
+    const limit = searchParams.get("limit") ?? 6;
+
+    const { data: heroesResponse } = usePaginatedHero(+page, +limit, category);
+    const { data: summary } = useHeroSummary();
+
+    const handleClickTab = (category: TabsType) => {
+        setSearchParams((prev) => {
+            prev.set("tab", category);
+            prev.set("page", "1");
+            return prev;
+        });
+    };
+
     return (
         <>
             {/* Header */}
@@ -21,24 +41,24 @@ export const HomePage = () => {
             <HeroStats />
 
             {/* Tabs */}
-            <Tabs value={activeTab} className="mb-8">
+            <Tabs value={category} className="mb-8">
                 <TabsList className="grid w-full grid-cols-4">
-                    <TabsTrigger onClick={() => setActiveTab("all")} value="all">
-                        All Characters (16)
+                    <TabsTrigger onClick={() => handleClickTab("all")} value="all">
+                        All Characters ({summary?.totalHeroes})
                     </TabsTrigger>
                     <TabsTrigger
-                        onClick={() => setActiveTab("favorites")}
+                        onClick={() => handleClickTab("favorites")}
                         value="favorites"
                         className="flex items-center gap-2"
                     >
                         <Heart className="h-4 w-4" />
                         Favorites (3)
                     </TabsTrigger>
-                    <TabsTrigger onClick={() => setActiveTab("heroes")} value="heroes">
-                        Heroes (12)
+                    <TabsTrigger onClick={() => handleClickTab("hero")} value="hero">
+                        Heroes ({summary?.heroCount})
                     </TabsTrigger>
-                    <TabsTrigger onClick={() => setActiveTab("villians")} value="villains">
-                        Villains (2)
+                    <TabsTrigger onClick={() => handleClickTab("villain")} value="villain">
+                        Villains ({summary?.villainCount})
                     </TabsTrigger>
                 </TabsList>
 
@@ -48,30 +68,19 @@ export const HomePage = () => {
                 <TabsContent value="favorites">
                     <h1>Favoritos</h1>
                 </TabsContent>
-                <TabsContent value="heroes">
+                <TabsContent value="hero">
                     <h1>Héroes!</h1>
                 </TabsContent>
-                <TabsContent value="villians">
+                <TabsContent value="villain">
                     <h1>Villanos</h1>
                 </TabsContent>
             </Tabs>
 
-            {/* Results info */}
-            {/* <div className="flex justify-between items-center mb-6">
-                    <div className="flex items-center gap-4">
-                        <p className="text-gray-600">Showing 6 of 16 characters</p>
-                        <Badge variant="secondary" className="flex items-center gap-1">
-                            <Filter className="h-3 w-3" />
-                            Filtered
-                        </Badge>
-                    </div>
-                </div> */}
-
             {/* Character Grid */}
-            <HeroGrid />
+            <HeroGrid heroes={heroesResponse?.heroes ?? []} />
 
             {/* Pagination */}
-            <CustomPagination totalPages={8} />
+            <CustomPagination totalPages={heroesResponse?.pages ?? 0} />
         </>
     );
 };
