@@ -9,7 +9,7 @@ export interface SearchProps {
 const BASE_URL = import.meta.env.VITE_API_URL;
 export const getSearchAction = async (filters: SearchProps) => {
     const hasValues = Object.values(filters).length > 0;
-    console.log("->hasValues", hasValues, "filters", filters);
+
     if (!hasValues) return [];
 
     const { data } = await heroApi.get<Hero[]>("/search", {

@@ -1,27 +1,54 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useSearchParams } from "react-router";
 import { Filter, Grid, Plus, Search, SortAsc } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Slider } from "@/components/ui/slider";
+import { Accordion, AccordionContent, AccordionItem } from "@/components/ui/accordion";
 
 export const SearchControls = () => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const [searchParams, setSearchParams] = useSearchParams();
+    const [changingStrength, setChangingStrength] = useState<number>(
+        searchParams.get("strength") ? Number(searchParams.get("strength")) : 0
+    );
+
+    const activeAccordion = searchParams.get("active-accordion") ?? "";
+
+    const setQueryParams = (name: string, value: string) => {
+        setSearchParams((prev) => {
+            if (!value || value.trim() === "") {
+                prev.delete(name);
+            } else {
+                prev.set(name, value);
+            }
+
+            return prev;
+        });
+    };
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === "Enter") {
-            const query = inputRef.current?.value.trim();
-            setSearchParams((prev) => {
-                if (query) {
-                    prev.set("name", query);
-                } else {
-                    prev.delete("name");
-                }
-                return prev;
-            });
+            const query = inputRef.current?.value.trim() ?? "";
+
+            setQueryParams("name", query);
         }
+    };
+
+    const handleOnCommit = (values: number[]) => {
+        const [selectedStrength] = values;
+        setQueryParams("strength", selectedStrength > 0 ? selectedStrength.toString() : "");
+    };
+
+    const handleOnValueChange = (values: number[]) => {
+        const [value] = values;
+        setChangingStrength(value);
+    };
+
+    const handleToggleFilterControls = () => {
+        setQueryParams("active-accordion", activeAccordion === "" ? "advance-filters-panel" : "");
     };
 
     return (
@@ -41,17 +68,17 @@ export const SearchControls = () => {
 
                 {/* Action buttons */}
                 <div className="flex gap-2">
-                    <Button variant="outline" className="h-12 bg-transparent">
+                    <Button variant="outline" className="h-12" onClick={handleToggleFilterControls}>
                         <Filter className="h-4 w-4 mr-2" />
                         Filters
                     </Button>
 
-                    <Button variant="outline" className="h-12 bg-transparent">
+                    <Button variant="outline" className="h-12">
                         <SortAsc className="h-4 w-4 mr-2" />
                         Sort by Name
                     </Button>
 
-                    <Button variant="outline" className="h-12 bg-transparent">
+                    <Button variant="outline" className="h-12">
                         <Grid className="h-4 w-4" />
                     </Button>
 
@@ -62,47 +89,56 @@ export const SearchControls = () => {
                 </div>
             </div>
             {/* Advanced Filters */}
-            <div className="bg-white rounded-lg p-6 mb-8 shadow-sm border">
-                <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-lg font-semibold">Advanced Filters</h3>
-                    <Button variant="ghost">Clear All</Button>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div className="space-y-2">
-                        <label className="text-sm font-medium">Team</label>
-                        <div className="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
-                            All teams
+
+            <Accordion type="single" collapsible value={activeAccordion}>
+                <AccordionItem value="advance-filters-panel">
+                    <AccordionContent>
+                        <div className="bg-white rounded-lg p-6 mb-8 shadow-sm border">
+                            <div className="flex justify-between items-center mb-4">
+                                <h3 className="text-lg font-semibold">Advanced Filters</h3>
+                                <Button variant="ghost">Clear All</Button>
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium">Team</label>
+                                    <div className="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
+                                        All teams
+                                    </div>
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium">Category</label>
+                                    <div className="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
+                                        All categories
+                                    </div>
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium">Universe</label>
+                                    <div className="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
+                                        All universes
+                                    </div>
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium">Status</label>
+                                    <div className="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
+                                        All statuses
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="mt-4">
+                                <label className="text-sm font-medium">Minimum Strength: {changingStrength}/10</label>
+                                <div className="relative flex w-full touch-none select-none items-center mt-2 py-5">
+                                    <Slider
+                                        max={10}
+                                        step={1}
+                                        onValueCommit={handleOnCommit}
+                                        onValueChange={handleOnValueChange}
+                                    />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div className="space-y-2">
-                        <label className="text-sm font-medium">Category</label>
-                        <div className="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
-                            All categories
-                        </div>
-                    </div>
-                    <div className="space-y-2">
-                        <label className="text-sm font-medium">Universe</label>
-                        <div className="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
-                            All universes
-                        </div>
-                    </div>
-                    <div className="space-y-2">
-                        <label className="text-sm font-medium">Status</label>
-                        <div className="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
-                            All statuses
-                        </div>
-                    </div>
-                </div>
-                <div className="mt-4">
-                    <label className="text-sm font-medium">Minimum Strength: 0/10</label>
-                    <div className="relative flex w-full touch-none select-none items-center mt-2">
-                        <div className="relative h-2 w-full grow overflow-hidden rounded-full bg-secondary">
-                            <div className="absolute h-full bg-primary" style={{ width: "0%" }} />
-                        </div>
-                        <div className="block h-5 w-5 rounded-full border-2 border-primary bg-background ring-offset-background transition-colors" />
-                    </div>
-                </div>
-            </div>
+                    </AccordionContent>
+                </AccordionItem>
+            </Accordion>
         </>
     );
 };
