@@ -1,3 +1,4 @@
+import { use } from "react";
 import { Heart } from "lucide-react";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -8,6 +9,7 @@ import { CustomPagination } from "@/components/custom/CustomPagination";
 import { useSearchParams } from "react-router";
 import { useHeroSummary } from "@/heroes/hooks/useHeroSummary";
 import { usePaginatedHero } from "@/heroes/hooks/usePaginatedHero";
+import { FavoriteHeroContext } from "@/heroes/context/FavoriteHeroContext";
 
 type TabsType = "all" | "favorites" | "hero" | "villain";
 
@@ -20,6 +22,7 @@ export const HomePage = () => {
 
     const { data: heroesResponse } = usePaginatedHero(+page, +limit, category);
     const { data: summary } = useHeroSummary();
+    const { favoritesCount, favorites } = use(FavoriteHeroContext);
 
     const handleClickTab = (category: TabsType) => {
         setSearchParams((prev) => {
@@ -52,7 +55,7 @@ export const HomePage = () => {
                         className="flex items-center gap-2"
                     >
                         <Heart className="h-4 w-4" />
-                        Favorites (3)
+                        Favorites ({favoritesCount})
                     </TabsTrigger>
                     <TabsTrigger onClick={() => handleClickTab("hero")} value="hero">
                         Heroes ({summary?.heroCount})
@@ -77,7 +80,11 @@ export const HomePage = () => {
             </Tabs>
 
             {/* Character Grid */}
-            <HeroGrid heroes={heroesResponse?.heroes ?? []} />
+            {category === "favorites" ? (
+                <HeroGrid heroes={favorites} />
+            ) : (
+                <HeroGrid heroes={heroesResponse?.heroes ?? []} />
+            )}
 
             {/* Pagination */}
             <CustomPagination totalPages={heroesResponse?.pages ?? 0} />
