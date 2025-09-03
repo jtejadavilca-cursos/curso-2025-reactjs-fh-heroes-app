@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getHeroesByIdOsSlugAction } from "../actions/get-hero-by-id-or-slug.action";
+import { getHeroesByIdOsSlugAction } from "../actions/get-hero.action";
 
 export const useHeroDetail = (idSlug: string) => {
     const { data: superheroData } = useQuery({
