@@ -97,8 +97,6 @@ describe("Testing usePaginatedHero.tsx", () => {
             expect(result.current.isSuccess).toBe(true);
         });
 
-        console.log("result", result);
-
         expect(mockGetHeroesByPageAction).toBeTruthy();
         expect(mockGetHeroesByPageAction).toHaveBeenCalledWith(expReq.page, expReq.limit, expReq.category);
         expect(mockGetHeroesByPageAction).toHaveBeenCalledOnce();

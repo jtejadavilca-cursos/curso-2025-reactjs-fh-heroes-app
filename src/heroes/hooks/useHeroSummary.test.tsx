@@ -16,7 +16,6 @@ const tanStackCustomProvider = () => {
         defaultOptions: {
             queries: {
                 retry: false,
-                staleTime: 0,
             },
         },
     });

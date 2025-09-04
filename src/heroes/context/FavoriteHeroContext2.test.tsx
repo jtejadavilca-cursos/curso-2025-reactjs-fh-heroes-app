@@ -2,12 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, test, vi } from "vitest";
 import { FavoriteHeroContext, FavoriteHeroProvider } from "./FavoriteHeroContext";
 import { use } from "react";
-import type { Hero } from "../types/hero.interface";
-
-const mockHero = {
-    id: 123,
-    name: "My Test hero",
-} as unknown as Hero;
+import { mockHero } from "@/__data__/mocks/mock-hero";
 
 const localStorageMock = {
     getItem: vi.fn(),
