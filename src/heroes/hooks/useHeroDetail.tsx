@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { getHeroesByIdOsSlugAction } from "../actions/get-hero.action";
+import { getHeroeByIdOsSlugAction } from "../actions/get-hero.action";
 
 export const useHeroDetail = (idSlug: string) => {
     const { data: superheroData } = useQuery({
         queryKey: ["heroes", "idSlug", idSlug],
-        queryFn: () => getHeroesByIdOsSlugAction(idSlug),
+        queryFn: () => getHeroeByIdOsSlugAction(idSlug),
         staleTime: 1000 * 60 * 5, // 5 minutos
     });
 
