@@ -22,7 +22,7 @@ export const HomePage = () => {
 
     const { data: heroesResponse } = usePaginatedHero(+page, +limit, category);
     const { data: summary } = useHeroSummary();
-    const { favoritesCount, favorites } = use(FavoriteHeroContext);
+    const { favoritesCount, favoritesPaginated, totalFavoritePages } = use(FavoriteHeroContext);
 
     const handleClickTab = (category: TabsType) => {
         setSearchParams((prev) => {
@@ -46,48 +46,65 @@ export const HomePage = () => {
             {/* Tabs */}
             <Tabs value={category} className="mb-8">
                 <TabsList className="grid w-full grid-cols-4">
-                    <TabsTrigger onClick={() => handleClickTab("all")} value="all">
+                    <TabsTrigger
+                        onClick={() => handleClickTab("all")}
+                        value="all"
+                        data-testid="tab-trigger-summary-all-heroes"
+                    >
                         All Characters ({summary?.totalHeroes})
                     </TabsTrigger>
                     <TabsTrigger
                         onClick={() => handleClickTab("favorites")}
                         value="favorites"
                         className="flex items-center gap-2"
+                        data-testid="tab-trigger-summary-favorites-heroes"
                     >
                         <Heart className="h-4 w-4" />
                         Favorites ({favoritesCount})
                     </TabsTrigger>
-                    <TabsTrigger onClick={() => handleClickTab("hero")} value="hero">
+                    <TabsTrigger
+                        onClick={() => handleClickTab("hero")}
+                        value="hero"
+                        data-testid="tab-trigger-summary-only-heroes"
+                    >
                         Heroes ({summary?.heroCount})
                     </TabsTrigger>
-                    <TabsTrigger onClick={() => handleClickTab("villain")} value="villain">
+                    <TabsTrigger
+                        onClick={() => handleClickTab("villain")}
+                        value="villain"
+                        data-testid="tab-trigger-summary-only-villain"
+                    >
                         Villains ({summary?.villainCount})
                     </TabsTrigger>
                 </TabsList>
 
-                <TabsContent value="all">
+                <TabsContent value="all" data-testid="tab-content-summary-all-heroes">
                     <h1>Todos los personales</h1>
                 </TabsContent>
-                <TabsContent value="favorites">
+                <TabsContent value="favorites" data-testid="tab-content-summary-favorites-heroes">
                     <h1>Favoritos</h1>
                 </TabsContent>
-                <TabsContent value="hero">
+                <TabsContent value="hero" data-testid="tab-content-summary-only-heroes">
                     <h1>Héroes!</h1>
                 </TabsContent>
-                <TabsContent value="villain">
+                <TabsContent value="villain" data-testid="tab-content-summary-only-villain">
                     <h1>Villanos</h1>
                 </TabsContent>
             </Tabs>
 
             {/* Character Grid */}
             {category === "favorites" ? (
-                <HeroGrid heroes={favorites} />
+                <HeroGrid heroes={favoritesPaginated} />
             ) : (
                 <HeroGrid heroes={heroesResponse?.heroes ?? []} />
             )}
 
             {/* Pagination */}
-            <CustomPagination totalPages={heroesResponse?.pages ?? 0} />
+            {category === "favorites" ? (
+                <CustomPagination totalPages={totalFavoritePages} />
+            ) : (
+                <CustomPagination totalPages={heroesResponse?.pages ?? 0} />
+            )}
         </>
     );
 };

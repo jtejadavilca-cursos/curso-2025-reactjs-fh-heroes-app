@@ -1,10 +1,13 @@
 import { createContext, useEffect, useState, type PropsWithChildren } from "react";
 import type { Hero } from "../types/hero.interface";
+import { useSearchParams } from "react-router";
 
 interface FavoriteHeroContextProps {
     // State
     favorites: Hero[];
+    favoritesPaginated: Hero[];
     favoritesCount: number;
+    totalFavoritePages: number;
 
     // Methods
     isFavorite: (hero: Hero) => boolean;
@@ -23,6 +26,16 @@ const getFavoritesfromLocalStorage = (): Hero[] => {
 
 export const FavoriteHeroProvider = ({ children }: PropsWithChildren) => {
     const [favorites, setFavorites] = useState<Hero[]>(getFavoritesfromLocalStorage());
+
+    const [searchParams] = useSearchParams();
+
+    const category = searchParams.get("tab") ?? "all";
+    const page = searchParams.get("page") ?? 1;
+    const offset = isNaN(+page) || +page < 1 ? 1 : +page - 1;
+
+    let limit = searchParams.get("limit") ?? 6;
+    limit = isNaN(+limit) ? 6 : +limit;
+    const showFavorites = category === "favorites";
 
     const isFavorite = (hero: Hero) => {
         return favorites.some((h) => h.id === hero.id);
@@ -52,8 +65,11 @@ export const FavoriteHeroProvider = ({ children }: PropsWithChildren) => {
     return (
         <FavoriteHeroContext
             value={{
+                totalFavoritePages: showFavorites ? Math.ceil(favorites.length / limit) : 0,
                 favoritesCount: favorites.length,
+
                 favorites,
+                favoritesPaginated: favorites.slice(offset * limit, offset * limit + limit),
                 isFavorite,
                 toggleFavorite,
                 calculatePercentage,
