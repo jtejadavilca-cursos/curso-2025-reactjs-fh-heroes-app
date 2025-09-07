@@ -1,0 +1,407 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Testing HomePage.test > should render HomePage with default values 1`] = `
+<div>
+  <div
+    data-testid="mocked-jumbotron-header"
+  >
+    Mocked CustomJumbotron
+  </div>
+  <div
+    data-testid="mocked-herostats-section"
+  >
+    Mocked HeroStats section
+  </div>
+  <div
+    class="flex flex-col gap-2 mb-8"
+    data-orientation="horizontal"
+    data-slot="tabs"
+    dir="ltr"
+  >
+    <div
+      aria-orientation="horizontal"
+      class="bg-muted text-muted-foreground h-9 items-center justify-center rounded-lg p-[3px] grid w-full grid-cols-4"
+      data-orientation="horizontal"
+      data-slot="tabs-list"
+      role="tablist"
+      style="outline: none;"
+      tabindex="0"
+    >
+      <button
+        aria-controls="radix-«r0»-content-all"
+        aria-selected="true"
+        class="data-[state=active]:bg-background dark:data-[state=active]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring dark:data-[state=active]:border-input dark:data-[state=active]:bg-input/30 text-foreground dark:text-muted-foreground inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-sm [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+        data-orientation="horizontal"
+        data-radix-collection-item=""
+        data-slot="tabs-trigger"
+        data-state="active"
+        data-testid="tab-trigger-summary-all-heroes"
+        id="radix-«r0»-trigger-all"
+        role="tab"
+        tabindex="-1"
+        type="button"
+      >
+        All Characters (
+        10
+        )
+      </button>
+      <button
+        aria-controls="radix-«r0»-content-favorites"
+        aria-selected="false"
+        class="data-[state=active]:bg-background dark:data-[state=active]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring dark:data-[state=active]:border-input dark:data-[state=active]:bg-input/30 text-foreground dark:text-muted-foreground h-[calc(100%-1px)] flex-1 justify-center rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-sm [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 flex items-center gap-2"
+        data-orientation="horizontal"
+        data-radix-collection-item=""
+        data-slot="tabs-trigger"
+        data-state="inactive"
+        data-testid="tab-trigger-summary-favorites-heroes"
+        id="radix-«r0»-trigger-favorites"
+        role="tab"
+        tabindex="-1"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          class="lucide lucide-heart h-4 w-4"
+          fill="none"
+          height="24"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"
+          />
+        </svg>
+        Favorites (
+        1
+        )
+      </button>
+      <button
+        aria-controls="radix-«r0»-content-hero"
+        aria-selected="false"
+        class="data-[state=active]:bg-background dark:data-[state=active]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring dark:data-[state=active]:border-input dark:data-[state=active]:bg-input/30 text-foreground dark:text-muted-foreground inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-sm [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+        data-orientation="horizontal"
+        data-radix-collection-item=""
+        data-slot="tabs-trigger"
+        data-state="inactive"
+        data-testid="tab-trigger-summary-only-heroes"
+        id="radix-«r0»-trigger-hero"
+        role="tab"
+        tabindex="-1"
+        type="button"
+      >
+        Heroes (
+        6
+        )
+      </button>
+      <button
+        aria-controls="radix-«r0»-content-villain"
+        aria-selected="false"
+        class="data-[state=active]:bg-background dark:data-[state=active]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring dark:data-[state=active]:border-input dark:data-[state=active]:bg-input/30 text-foreground dark:text-muted-foreground inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-sm [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+        data-orientation="horizontal"
+        data-radix-collection-item=""
+        data-slot="tabs-trigger"
+        data-state="inactive"
+        data-testid="tab-trigger-summary-only-villain"
+        id="radix-«r0»-trigger-villain"
+        role="tab"
+        tabindex="-1"
+        type="button"
+      >
+        Villains (
+        4
+        )
+      </button>
+    </div>
+    <div
+      aria-labelledby="radix-«r0»-trigger-all"
+      class="flex-1 outline-none"
+      data-orientation="horizontal"
+      data-slot="tabs-content"
+      data-state="active"
+      data-testid="tab-content-summary-all-heroes"
+      id="radix-«r0»-content-all"
+      role="tabpanel"
+      style="animation-duration: 0s;"
+      tabindex="0"
+    >
+      <h1>
+        Todos los personales
+      </h1>
+    </div>
+    <div
+      aria-labelledby="radix-«r0»-trigger-favorites"
+      class="flex-1 outline-none"
+      data-orientation="horizontal"
+      data-slot="tabs-content"
+      data-state="inactive"
+      data-testid="tab-content-summary-favorites-heroes"
+      hidden=""
+      id="radix-«r0»-content-favorites"
+      role="tabpanel"
+      tabindex="0"
+    />
+    <div
+      aria-labelledby="radix-«r0»-trigger-hero"
+      class="flex-1 outline-none"
+      data-orientation="horizontal"
+      data-slot="tabs-content"
+      data-state="inactive"
+      data-testid="tab-content-summary-only-heroes"
+      hidden=""
+      id="radix-«r0»-content-hero"
+      role="tabpanel"
+      tabindex="0"
+    />
+    <div
+      aria-labelledby="radix-«r0»-trigger-villain"
+      class="flex-1 outline-none"
+      data-orientation="horizontal"
+      data-slot="tabs-content"
+      data-state="inactive"
+      data-testid="tab-content-summary-only-villain"
+      hidden=""
+      id="radix-«r0»-content-villain"
+      role="tabpanel"
+      tabindex="0"
+    />
+  </div>
+  <div
+    data-testid="mocked-hero-grid-section"
+  >
+    <h3>
+      Mocked Hero Grid
+    </h3>
+    <div
+      data-testid="card-123"
+    >
+      <h2>
+        Hero 
+        My Test hero
+      </h2>
+    </div>
+  </div>
+  <div
+    data-testid="mocked-paginator-section"
+  >
+    <h3>
+      Mocked CustomPagination section
+    </h3>
+    <h2>
+      Total pages : 
+      1
+    </h2>
+  </div>
+</div>
+`;
+
+exports[`Testing HomePage.test > should show favorite tab 1`] = `
+<div>
+  <div
+    data-testid="mocked-jumbotron-header"
+  >
+    Mocked CustomJumbotron
+  </div>
+  <div
+    data-testid="mocked-herostats-section"
+  >
+    Mocked HeroStats section
+  </div>
+  <div
+    class="flex flex-col gap-2 mb-8"
+    data-orientation="horizontal"
+    data-slot="tabs"
+    dir="ltr"
+  >
+    <div
+      aria-orientation="horizontal"
+      class="bg-muted text-muted-foreground h-9 items-center justify-center rounded-lg p-[3px] grid w-full grid-cols-4"
+      data-orientation="horizontal"
+      data-slot="tabs-list"
+      role="tablist"
+      style="outline: none;"
+      tabindex="0"
+    >
+      <button
+        aria-controls="radix-«r5»-content-all"
+        aria-selected="false"
+        class="data-[state=active]:bg-background dark:data-[state=active]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring dark:data-[state=active]:border-input dark:data-[state=active]:bg-input/30 text-foreground dark:text-muted-foreground inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-sm [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+        data-orientation="horizontal"
+        data-radix-collection-item=""
+        data-slot="tabs-trigger"
+        data-state="inactive"
+        data-testid="tab-trigger-summary-all-heroes"
+        id="radix-«r5»-trigger-all"
+        role="tab"
+        tabindex="-1"
+        type="button"
+      >
+        All Characters (
+        10
+        )
+      </button>
+      <button
+        aria-controls="radix-«r5»-content-favorites"
+        aria-selected="true"
+        class="data-[state=active]:bg-background dark:data-[state=active]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring dark:data-[state=active]:border-input dark:data-[state=active]:bg-input/30 text-foreground dark:text-muted-foreground h-[calc(100%-1px)] flex-1 justify-center rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-sm [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 flex items-center gap-2"
+        data-orientation="horizontal"
+        data-radix-collection-item=""
+        data-slot="tabs-trigger"
+        data-state="active"
+        data-testid="tab-trigger-summary-favorites-heroes"
+        id="radix-«r5»-trigger-favorites"
+        role="tab"
+        tabindex="-1"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          class="lucide lucide-heart h-4 w-4"
+          fill="none"
+          height="24"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"
+          />
+        </svg>
+        Favorites (
+        5
+        )
+      </button>
+      <button
+        aria-controls="radix-«r5»-content-hero"
+        aria-selected="false"
+        class="data-[state=active]:bg-background dark:data-[state=active]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring dark:data-[state=active]:border-input dark:data-[state=active]:bg-input/30 text-foreground dark:text-muted-foreground inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-sm [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+        data-orientation="horizontal"
+        data-radix-collection-item=""
+        data-slot="tabs-trigger"
+        data-state="inactive"
+        data-testid="tab-trigger-summary-only-heroes"
+        id="radix-«r5»-trigger-hero"
+        role="tab"
+        tabindex="-1"
+        type="button"
+      >
+        Heroes (
+        6
+        )
+      </button>
+      <button
+        aria-controls="radix-«r5»-content-villain"
+        aria-selected="false"
+        class="data-[state=active]:bg-background dark:data-[state=active]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring dark:data-[state=active]:border-input dark:data-[state=active]:bg-input/30 text-foreground dark:text-muted-foreground inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-sm [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+        data-orientation="horizontal"
+        data-radix-collection-item=""
+        data-slot="tabs-trigger"
+        data-state="inactive"
+        data-testid="tab-trigger-summary-only-villain"
+        id="radix-«r5»-trigger-villain"
+        role="tab"
+        tabindex="-1"
+        type="button"
+      >
+        Villains (
+        4
+        )
+      </button>
+    </div>
+    <div
+      aria-labelledby="radix-«r5»-trigger-all"
+      class="flex-1 outline-none"
+      data-orientation="horizontal"
+      data-slot="tabs-content"
+      data-state="inactive"
+      data-testid="tab-content-summary-all-heroes"
+      hidden=""
+      id="radix-«r5»-content-all"
+      role="tabpanel"
+      tabindex="0"
+    />
+    <div
+      aria-labelledby="radix-«r5»-trigger-favorites"
+      class="flex-1 outline-none"
+      data-orientation="horizontal"
+      data-slot="tabs-content"
+      data-state="active"
+      data-testid="tab-content-summary-favorites-heroes"
+      id="radix-«r5»-content-favorites"
+      role="tabpanel"
+      style="animation-duration: 0s;"
+      tabindex="0"
+    >
+      <h1>
+        Favoritos
+      </h1>
+    </div>
+    <div
+      aria-labelledby="radix-«r5»-trigger-hero"
+      class="flex-1 outline-none"
+      data-orientation="horizontal"
+      data-slot="tabs-content"
+      data-state="inactive"
+      data-testid="tab-content-summary-only-heroes"
+      hidden=""
+      id="radix-«r5»-content-hero"
+      role="tabpanel"
+      tabindex="0"
+    />
+    <div
+      aria-labelledby="radix-«r5»-trigger-villain"
+      class="flex-1 outline-none"
+      data-orientation="horizontal"
+      data-slot="tabs-content"
+      data-state="inactive"
+      data-testid="tab-content-summary-only-villain"
+      hidden=""
+      id="radix-«r5»-content-villain"
+      role="tabpanel"
+      tabindex="0"
+    />
+  </div>
+  <div
+    data-testid="mocked-hero-grid-section"
+  >
+    <h3>
+      Mocked Hero Grid
+    </h3>
+    <div
+      data-testid="card-456"
+    >
+      <h2>
+        Hero 
+        My Test hero 456
+      </h2>
+    </div>
+    <div
+      data-testid="card-678"
+    >
+      <h2>
+        Hero 
+        My Test hero 678
+      </h2>
+    </div>
+  </div>
+  <div
+    data-testid="mocked-paginator-section"
+  >
+    <h3>
+      Mocked CustomPagination section
+    </h3>
+    <h2>
+      Total pages : 
+      3
+    </h2>
+  </div>
+</div>
+`;

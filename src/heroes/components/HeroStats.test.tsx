@@ -6,8 +6,9 @@ import { useHeroSummary } from "../hooks/useHeroSummary";
 import type { SummaryInformationResponse } from "../types/summary-information.response";
 import { FavoriteHeroProvider } from "../context/FavoriteHeroContext";
 import { mockHero, mockSummaryData } from "@/__data__/mocks";
+import { MemoryRouter } from "react-router";
 
-vi.mock("../hooks/useHeroSummary");
+vi.mock("@/heroes/hooks/useHeroSummary");
 const mockUseHeroSummary = vi.mocked(useHeroSummary);
 const localStorageMock = {
     getItem: vi.fn(),
@@ -33,9 +34,11 @@ const renderHeroStats = (mockData?: Partial<SummaryInformationResponse>) => {
     } as unknown as ReturnType<typeof useHeroSummary>);
     return render(
         <QueryClientProvider client={queryClient}>
-            <FavoriteHeroProvider>
-                <HeroStats />
-            </FavoriteHeroProvider>
+            <MemoryRouter>
+                <FavoriteHeroProvider>
+                    <HeroStats />
+                </FavoriteHeroProvider>
+            </MemoryRouter>
         </QueryClientProvider>
     );
 };

@@ -3,6 +3,7 @@ import { afterEach, describe, expect, test, vi } from "vitest";
 import { FavoriteHeroContext, FavoriteHeroProvider } from "./FavoriteHeroContext";
 import { use } from "react";
 import { mockHero } from "@/__data__/mocks/mock-hero";
+import { MemoryRouter } from "react-router";
 
 const localStorageMock = {
     getItem: vi.fn(),
@@ -15,13 +16,15 @@ Object.defineProperty(window, "localStorage", {
 });
 
 const TestComponent = () => {
-    const { favoritesCount, favorites, isFavorite, toggleFavorite } = use(FavoriteHeroContext);
+    const { favoritesCount, favoritesPaginated, isFavorite, toggleFavorite } = use(FavoriteHeroContext);
     return (
         <div>
             <div data-testid="favorite-count">{favoritesCount}</div>
             <div data-testid="favorite-list">
-                {favorites.map((f) => (
-                    <div data-testid={`hero-${f.id}`}>{f.id}</div>
+                {favoritesPaginated.map((f) => (
+                    <div key={f.id} data-testid={`hero-${f.id}`}>
+                        {f.id}
+                    </div>
                 ))}
             </div>
             <button data-testid="toggle-favorite" onClick={() => toggleFavorite(mockHero)}>
@@ -32,15 +35,19 @@ const TestComponent = () => {
     );
 };
 
-const renderContextTest = () => {
+const renderContextTest = (
+    initialEntries?: string[] //
+) => {
     return render(
-        <FavoriteHeroProvider>
-            <TestComponent />
-        </FavoriteHeroProvider>
+        <MemoryRouter initialEntries={initialEntries}>
+            <FavoriteHeroProvider>
+                <TestComponent />
+            </FavoriteHeroProvider>
+        </MemoryRouter>
     );
 };
 
-describe("Testing FavoriteHeroContext.tsx", () => {
+describe("Testing (2) FavoriteHeroContext.tsx", () => {
     afterEach(() => {
         vi.clearAllMocks();
     });
