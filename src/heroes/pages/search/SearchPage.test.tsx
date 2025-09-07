@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
 import SearchPage from "./SearchPage";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useHeroSearch } from "@/heroes/hooks/useHeroSearch";
@@ -20,16 +20,10 @@ const queryClient = new QueryClient({
 const renderHomePage = (
     initialEntries?: string[], //
     searchResult: Hero[] = []
-    // heroes: Hero[] = [mockHero], //
-    // pages: number = 1 //
 ) => {
     mockUseHeroSearch.mockReturnValue({
         data: searchResult,
     } as unknown as ReturnType<typeof useHeroSearch>);
-
-    // mockUseHeroSummary.mockReturnValue({
-    //     data: summary,
-    // } as unknown as ReturnType<typeof useHeroSummary>);
 
     return render(
         <MemoryRouter initialEntries={initialEntries}>
